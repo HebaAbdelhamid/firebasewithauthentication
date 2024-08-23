@@ -1,3 +1,4 @@
+
 buildscript {
     ext.kotlin_version = '1.6.10'
     repositories {
@@ -6,10 +7,12 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:7.4.0'  // Correct Android Gradle Plugin version
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10"
     }
 }
+apply plugin: 'com.android.application'  // Use apply for Android plugin
+apply plugin: 'kotlin-android'  // You can still apply Kotlin plugin in the old way
 
 allprojects {
     repositories {
@@ -26,6 +29,6 @@ subprojects {
     project.evaluationDependsOn(':app')
 }
 
-task clean(type: Delete) {
+tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
